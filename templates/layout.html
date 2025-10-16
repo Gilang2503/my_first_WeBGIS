@@ -3,9 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Peta Wisata</title>
+  <title>Peta Wisata Edukasi</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-
   <style>
     html, body {
       height: 100%;
@@ -14,7 +13,7 @@
       overflow: hidden;
     }
     body {
-      background-color: #f0f4f8; /* Warna lembut Bootstrap-style */
+      background-color: #e0f7f4;
     }
     .main-container {
       display: flex;
@@ -34,12 +33,13 @@
       font-size: 1.4rem;
       margin-bottom: 1.5rem;
       text-align: center;
-      color: #0d6efd;
+      color: #009688;
     }
     .map-container {
       flex-grow: 1;
       position: relative;
       z-index: 1;
+      background-color: #b2dfdb;
     }
     .map-container iframe {
       width: 100%;
@@ -47,22 +47,20 @@
       border: none;
     }
     .btn-primary {
-      background-color: #0d6efd;
+      background-color: #009688;
       border: none;
     }
     .btn-primary:hover {
-      background-color: #0b5ed7;
+      background-color: #00796b;
     }
     .btn-secondary {
-      background-color: #6c757d;
+      background-color: #80cbc4;
       border: none;
     }
   </style>
 </head>
-
 <body>
   <div class="main-container">
-    <!-- Sidebar kiri -->
     <div class="sidebar">
       <h1>WebGIS Wisata Edukasi</h1>
       <form action="/" method="POST" class="mb-3">
@@ -75,7 +73,6 @@
             <option value="taman nasional" {% if kategori_wisata == "taman nasional" %}selected{% endif %}>Taman Nasional</option>
           </select>
         </div>
-
         <div class="mb-3">
           <label for="harga" class="form-label">Harga Tiket</label>
           <select id="harga" name="harga" class="form-select">
@@ -84,28 +81,44 @@
             <option value="atas" {% if harga == "atas" %}selected{% endif %}>Di atas 20 ribu</option>
           </select>
         </div>
-
         <div class="d-grid gap-2">
           <button type="submit" class="btn btn-primary">Filter</button>
-          <!-- ✅ Tombol No Filter -->
           <a href="/" class="btn btn-secondary">No Filter</a>
         </div>
       </form>
     </div>
 
-    <!-- Peta di kanan -->
-    <div class="map-container">
+    <div class="map-container" id="map-container">
       {{ map_html|safe }}
     </div>
   </div>
 
   <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      const iframe = document.querySelector(".map-container iframe");
-      if (iframe) {
-        iframe.setAttribute("allow", "geolocation *; fullscreen *; microphone *; camera *");
+    // Hapus peta lama agar tidak ganda
+    document.addEventListener("DOMContentLoaded", function () {
+      const mapContainer = document.getElementById("map-container");
+      const iframes = mapContainer.querySelectorAll("iframe");
+      if (iframes.length > 1) {
+        for (let i = 0; i < iframes.length - 1; i++) {
+          iframes[i].remove();
+        }
       }
     });
+  </script>
+
+  <!-- === Tambahan Script Simpan dan Restore Posisi/Filter Terakhir === -->
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+      if (window.location.pathname === "/map" || window.location.pathname === "/") {
+          // Simpan posisi filter terakhir
+          const form = document.querySelector("form");
+          form.addEventListener("submit", () => {
+              const jenis = document.getElementById("jenis").value;
+              const harga = document.getElementById("harga").value;
+              localStorage.setItem("filterState", JSON.stringify({ jenis, harga }));
+          });
+      }
+  });
   </script>
 </body>
 </html>

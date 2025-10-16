@@ -21,10 +21,24 @@
         <p><strong>Deskripsi:</strong> Taman Nasional Baluran dikenal sebagai “Africa van Java” karena memiliki padang savana luas yang mirip Afrika. Kawasan ini menjadi habitat berbagai satwa liar seperti banteng, rusa, merak, dan kera ekor panjang. Cocok untuk wisata edukasi dan fotografi alam.</p>
         <p><strong>Tips:</strong> Datang pagi hari untuk melihat satwa aktif dan hindari musim hujan agar jalur tidak becek.</p>
         <p>
-            <a href="/map" style="display:inline-block; padding:8px 16px; background:#3498db; color:white; text-decoration:none; border-radius:5px;">⬅ Kembali ke Peta</a>
+            <a id="back-link" href="#" style="display:inline-block; padding:8px 16px; background:#3498db; color:white; text-decoration:none; border-radius:5px;">⬅ Kembali ke Peta</a>
         </p>
-        <!-- <p><a href="../../wisata_edu_map.html" style="display:inline-block; padding:8px 16px; background:#3498db; color:white; text-decoration:none; border-radius:5px;">⬅ Kembali ke Peta</a></p>
-        <!-- <p><a href="https://youtu.be/example3" target="_blank">🎥 Lihat video panduan wisata</a></p> -->
     </div>
+
+    <script>
+      document.getElementById("back-link").addEventListener("click", function(e) {
+          e.preventDefault();
+          const saved = localStorage.getItem("filterState");
+          if (saved) {
+              const { jenis, harga } = JSON.parse(saved);
+              let url = "/map?";
+              if (jenis) url += `jenis=${jenis}&`;
+              if (harga) url += `harga=${harga}`;
+              window.location.href = url;
+          } else {
+              window.location.href = "/map";
+          }
+      });
+    </script>
 </body>
 </html>
