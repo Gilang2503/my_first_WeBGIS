@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Peta Wisata</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+    body {
+      background-color: #f0f4f8; /* Warna lembut Bootstrap-style */
+    }
+    .main-container {
+      display: flex;
+      height: 100vh;
+      width: 100%;
+    }
+    .sidebar {
+      width: 320px;
+      background-color: #ffffff;
+      border-right: 1px solid #dee2e6;
+      padding: 20px;
+      box-shadow: 2px 0 8px rgba(0,0,0,0.05);
+      overflow-y: auto;
+      z-index: 9999;
+    }
+    .sidebar h1 {
+      font-size: 1.4rem;
+      margin-bottom: 1.5rem;
+      text-align: center;
+      color: #0d6efd;
+    }
+    .map-container {
+      flex-grow: 1;
+      position: relative;
+      z-index: 1;
+    }
+    .map-container iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    .btn-primary {
+      background-color: #0d6efd;
+      border: none;
+    }
+    .btn-primary:hover {
+      background-color: #0b5ed7;
+    }
+    .btn-secondary {
+      background-color: #6c757d;
+      border: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="main-container">
+    <!-- Sidebar kiri -->
+    <div class="sidebar">
+      <h1>WebGIS Wisata Edukasi</h1>
+      <form action="/" method="POST" class="mb-3">
+        <div class="mb-3">
+          <label for="jenis" class="form-label">Jenis Wisata</label>
+          <select id="jenis" name="jenis" class="form-select">
+            <option value="">-- Pilih Jenis Wisata --</option>
+            <option value="goa" {% if kategori_wisata == "goa" %}selected{% endif %}>Goa</option>
+            <option value="air terjun" {% if kategori_wisata == "air terjun" %}selected{% endif %}>Air Terjun</option>
+            <option value="taman nasional" {% if kategori_wisata == "taman nasional" %}selected{% endif %}>Taman Nasional</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label for="harga" class="form-label">Harga Tiket</label>
+          <select id="harga" name="harga" class="form-select">
+            <option value="">-- Pilih Rentang Harga --</option>
+            <option value="bawah" {% if harga == "bawah" %}selected{% endif %}>Di bawah 20 ribu</option>
+            <option value="atas" {% if harga == "atas" %}selected{% endif %}>Di atas 20 ribu</option>
+          </select>
+        </div>
+
+        <div class="d-grid gap-2">
+          <button type="submit" class="btn btn-primary">Filter</button>
+          <!-- ✅ Tombol No Filter -->
+          <a href="/" class="btn btn-secondary">No Filter</a>
+        </div>
+      </form>
+    </div>
+
+    <!-- Peta di kanan -->
+    <div class="map-container">
+      {{ map_html|safe }}
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const iframe = document.querySelector(".map-container iframe");
+      if (iframe) {
+        iframe.setAttribute("allow", "geolocation *; fullscreen *; microphone *; camera *");
+      }
+    });
+  </script>
+</body>
+</html>

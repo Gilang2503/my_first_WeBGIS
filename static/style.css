@@ -1,0 +1,16 @@
+/* Header styling */
+.header {
+  position: relative;
+  background-color: white;
+  padding: 10px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Map container styling */
+#map-container {
+  position: relative;
+  height: 600px;
+  overflow: hidden;
+}
+

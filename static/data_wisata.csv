@@ -1,0 +1,7 @@
+nama_wisata,lokasi,latitude,longitude,harga,fasilitas,jalur,gambar,audio,video,jenis,info_link
+Air Terjun Madakaripura,Probolinggo,-7.8375,113.0425,25000,"Parkir, Toilet, Warung","Trekking 1.5 km","madakaripura.jpg","madakaripura.mp3","https://youtu.be/example1",Air Terjun,info_madakaripura.html
+Goa Gong,Pacitan,-8.2011,111.1056,20000,"Pemandu, Lampu Warna","Tangga batu","goa_gong.jpg","goa_gong.mp3","https://youtu.be/example2",Goa,info_goagong.html
+Taman Nasional Baluran,Situbondo,-7.9447,114.3875,0,"Safari, Menara Pandang","Jalur mobil","baluran.jpg","baluran.mp3","https://youtu.be/example3",Taman Nasional,info_baluran.html
+Air Terjun Tumpak Sewu,Lumajang,-8.2311,112.9225,20000,"Parkir, Warung, Pemandu","Trekking curam","tumpak_sewu.jpg","tumpak_sewu.mp3","https://youtu.be/example4",Air Terjun,info_tumpaksewu.html
+Goa Lowo,Trenggalek,-8.1567,111.7083,15000,"Penerangan, Pemandu","Jalur tangga","goa_lowo.jpg","goa_lowo.mp3","https://youtu.be/example5",Goa,info_goalowo.html
+Taman Nasional Meru Betiri,Jember,-8.4333,113.7833,0,"Pantai, Penyu, Camping","Jalur off-road","meru_betiri.jpg","meru_betiri.mp3","https://youtu.be/example6",Taman Nasional,info_merubetiri.html
